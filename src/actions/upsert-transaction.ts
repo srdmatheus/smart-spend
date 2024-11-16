@@ -12,7 +12,8 @@ import { z } from "zod";
 
 import { db } from "@/lib/prisma";
 
-const addTransactionSchema = z.object({
+const upsertTransactionSchema = z.object({
+  id: z.string().optional(),
   name: z.string(),
   amount: z.number(),
   type: z.nativeEnum(TransactionType),
@@ -21,18 +22,22 @@ const addTransactionSchema = z.object({
   date: z.date()
 });
 
-type AddTransactionParam = z.infer<typeof addTransactionSchema>;
+type UpsertTransactionParam = z.infer<typeof upsertTransactionSchema>;
 
-export const addTransaction = async (params: AddTransactionParam) => {
-  addTransactionSchema.parse(params);
+export const upsertTransaction = async (params: UpsertTransactionParam) => {
+  upsertTransactionSchema.parse(params);
 
   const { userId } = await auth();
   if (!userId) {
     throw new Error("Id de usuário não encontrado!");
   }
 
-  await db.transaction.create({
-    data: { ...params, userId }
+  await db.transaction.upsert({
+    where: {
+      id: params.id
+    },
+    update: { ...params, userId },
+    create: { ...params, userId }
   });
 
   revalidatePath("/transactions");

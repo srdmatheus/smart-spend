@@ -7,8 +7,12 @@ import {
 } from "@/constants";
 import { Transaction } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
+import { TrashIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
+import { EditTransactionButton } from "../components/edit-transaction-button";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -40,14 +44,39 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
   },
   {
     accessorKey: "date",
-    header: "Data"
+    header: "Data",
+    cell: ({ row: { original } }) => (
+      <span>
+        {new Date(original.date).toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        })}
+      </span>
+    )
   },
   {
     accessorKey: "amount",
-    header: "Valor"
+    header: "Valor",
+    cell: ({ row: { original } }) => (
+      <span>
+        {new Intl.NumberFormat("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        }).format(Number(original.amount))}
+      </span>
+    )
   },
   {
     accessorKey: "actions",
-    header: ""
+    header: "",
+    cell: ({ row: { original } }) => (
+      <>
+        <EditTransactionButton transaction={original} />
+        <Button variant="ghost" size="icon" className="text-muted-foreground">
+          <TrashIcon />
+        </Button>
+      </>
+    )
   }
 ];
