@@ -13,6 +13,10 @@ const switzer = localFont({
     {
       path: "./Switzer-Semibold.otf",
       weight: "600"
+    },
+    {
+      path: "./Switzer-Bold.otf",
+      weight: "700"
     }
   ],
   variable: "--font-sans"
