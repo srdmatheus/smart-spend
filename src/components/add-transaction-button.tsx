@@ -12,10 +12,7 @@ export const AddTransactionButton = () => {
 
   return (
     <>
-      <Button
-        className="rounded-full font-semibold"
-        onClick={() => setDialogIsOpen(true)}
-      >
+      <Button className="font-semibold" onClick={() => setDialogIsOpen(true)}>
         Adicionar Transação
         <ArrowDownUpIcon />
       </Button>

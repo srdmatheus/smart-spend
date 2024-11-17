@@ -17,7 +17,7 @@ const fontVariables = fonts.map((font) => font.variable).join(" ");
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-br">
-      <body className={`${fontVariables} font-sans text-xl antialiased`}>
+      <body className={`${fontVariables} dark font-sans antialiased`}>
         <ClerkProvider>{children}</ClerkProvider>
       </body>
     </html>
