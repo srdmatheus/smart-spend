@@ -5,6 +5,7 @@ import { SignInButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/logo";
 
 export default async function LoginPage() {
   const { userId } = await auth();
@@ -14,9 +15,7 @@ export default async function LoginPage() {
   return (
     <div className="grid h-dvh grid-cols-2 bg-[#101010] text-[#929292]">
       <main className="mx-auto flex h-full max-w-[560px] flex-col justify-center">
-        <h1 className="mb-8 font-semibold tracking-tight">
-          financeiro inteligente
-        </h1>
+        <Logo className="mb-8 text-[#929292]" width={180} />
         <h1 className="mb-3 text-4xl font-semibold">Bem-vindo!</h1>
         <p className="mb-8">
           O Financeiro Inteligente é um sistema de gestão financeira baseado em

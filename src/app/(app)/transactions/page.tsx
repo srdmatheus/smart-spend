@@ -1,3 +1,5 @@
+import { auth } from "@clerk/nextjs/server";
+
 import { db } from "@/lib/prisma";
 import { DataTable } from "@/components/ui/data-table";
 import { AddTransactionButton } from "@/components/add-transaction-button";
@@ -5,7 +7,11 @@ import { AddTransactionButton } from "@/components/add-transaction-button";
 import { transactionColumns } from "./columns";
 
 export default async function TransactionsPage() {
-  const transactions = await db.transaction.findMany();
+  const { userId } = auth();
+
+  if (!userId) return;
+
+  const transactions = await db.transaction.findMany({ where: { userId } });
 
   return (
     <main className="px-6">
