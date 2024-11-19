@@ -16,7 +16,7 @@ export default async function TransactionsPage() {
   return (
     <main className="px-6">
       <div className="flex w-full items-center justify-between pb-6">
-        <h1 className="text-xl font-bold">Transações</h1>
+        <h1 className="text-2xl font-bold">Transações</h1>
         <AddTransactionButton />
       </div>
       <DataTable columns={transactionColumns} data={transactions} />
