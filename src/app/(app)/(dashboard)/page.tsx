@@ -4,6 +4,7 @@ import { getDashboard } from "@/data/get-dashboard";
 import { auth } from "@clerk/nextjs/server";
 import { isMatch } from "date-fns";
 
+import { ExpensesPerCategory } from "./components/expenses-per-category";
 import { SummaryCards } from "./components/summary-cards";
 import { TimeSelect } from "./components/time-select";
 import { TransactionsPieChart } from "./components/transactions-pie-chart";
@@ -41,7 +42,11 @@ export default async function DashboardPage({
             <div className="col-span-1">
               <TransactionsPieChart {...dashboard} />
             </div>
-            <div className="col-span-2"></div>
+            <div className="col-span-2">
+              <ExpensesPerCategory
+                expenses={dashboard.totalExpensePerCategory}
+              />
+            </div>
           </div>
         </div>
         <div className="col-span-1">lorem</div>
