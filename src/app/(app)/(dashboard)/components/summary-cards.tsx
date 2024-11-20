@@ -5,47 +5,21 @@ import {
   WalletIcon
 } from "lucide-react";
 
-import { db } from "@/lib/prisma";
-
 import { SummaryCard } from "./summary-card";
 
 type SummaryCardsProps = {
-  month: string;
+  balance: number;
+  investmentsTotal: number;
+  depositTotal: number;
+  expensesTotal: number;
 };
 
-export const SummaryCards = async ({ month }: SummaryCardsProps) => {
-  const where = {
-    date: {
-      gte: new Date(`${new Date().getFullYear()}-${month}-01`),
-      lt: new Date(`${new Date().getFullYear()}-${month}-31`)
-    }
-  };
-  const investmentsTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "INVESTMENT" },
-        _sum: { amount: true }
-      })
-    )?._sum.amount
-  );
-  const depositTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "DEPOSIT" },
-        _sum: { amount: true }
-      })
-    )?._sum.amount
-  );
-  const expensesTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "EXPENSE" },
-        _sum: { amount: true }
-      })
-    )?._sum.amount
-  );
-  const balance = depositTotal - expensesTotal - investmentsTotal;
-
+export const SummaryCards = async ({
+  depositTotal,
+  balance,
+  investmentsTotal,
+  expensesTotal
+}: SummaryCardsProps) => {
   return (
     <div className="space-y-6">
       <SummaryCard
@@ -59,7 +33,9 @@ export const SummaryCards = async ({ month }: SummaryCardsProps) => {
         <SummaryCard
           label="Investimentos"
           amount={investmentsTotal}
-          icon={<PiggyBankIcon className="size-8 rounded-sm bg-muted p-2" />}
+          icon={
+            <PiggyBankIcon className="size-8 rounded-sm bg-muted p-2 text-primary" />
+          }
         />
         <SummaryCard
           label="Ganhos"
