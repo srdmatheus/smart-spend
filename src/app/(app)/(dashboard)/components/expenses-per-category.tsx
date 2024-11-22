@@ -11,11 +11,11 @@ type ExpensesPerCategoryProps = {
 
 export const ExpensesPerCategory = ({ expenses }: ExpensesPerCategoryProps) => {
   return (
-    <Card>
-      <ScrollArea className="h-full rounded-md">
-        <CardHeader>
-          <CardTitle className="font-bold">Gastos por categoria</CardTitle>
-        </CardHeader>
+    <Card className="h">
+      <CardHeader className="mb-4 border-b">
+        <CardTitle className="font-bold">Gastos por categoria</CardTitle>
+      </CardHeader>
+      <ScrollArea className="h-[25rem] rounded-md">
         <CardContent className="space-y-6">
           {expenses.map((expense, index) => (
             <div key={`${expense}-${index}`} className="space-y-2">

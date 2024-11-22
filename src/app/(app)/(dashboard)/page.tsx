@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { isMatch } from "date-fns";
 
 import { ExpensesPerCategory } from "./components/expenses-per-category";
+import { LastTransactions } from "./components/last-transactions";
 import { SummaryCards } from "./components/summary-cards";
 import { TimeSelect } from "./components/time-select";
 import { TransactionsPieChart } from "./components/transactions-pie-chart";
@@ -49,7 +50,9 @@ export default async function DashboardPage({
             </div>
           </div>
         </div>
-        <div className="col-span-1">lorem</div>
+        <div className="col-span-1">
+          <LastTransactions lastTransactions={dashboard.lastTransactions} />
+        </div>
       </div>
     </main>
   );
