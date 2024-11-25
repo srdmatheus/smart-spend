@@ -35,19 +35,19 @@ export const LastTransactions = ({
   };
 
   return (
-    <Card>
-      <CardHeader className="mb-4 flex-row items-center justify-between border-b">
+    <Card className="col-span-2 overflow-hidden">
+      <CardHeader className="mb-4 flex-row items-center justify-between border-b px-6 py-2">
         <CardTitle className="font-bold">Últimas transações</CardTitle>
-        <Button asChild variant="outline">
+        <Button asChild variant="outline" size="sm">
           <Link href="/transactions">Ver mais</Link>
         </Button>
       </CardHeader>
-      <CardContent>
-        <ScrollArea>
+      <ScrollArea className="h-full">
+        <CardContent className="space-y-6 px-6 py-4">
           {lastTransactions.map((transaction) => (
             <div
               key={transaction.id}
-              className="mb-6 flex items-center justify-between"
+              className="flex items-center justify-between"
             >
               <div className="flex items-center gap-2">
                 <Image
@@ -86,8 +86,8 @@ export const LastTransactions = ({
               </div>
             </div>
           ))}
-        </ScrollArea>
-      </CardContent>
+        </CardContent>
+      </ScrollArea>
     </Card>
   );
 };

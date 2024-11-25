@@ -1,3 +1,4 @@
+import { auth } from "@clerk/nextjs/server";
 import { TransactionCategory, TransactionType } from "@prisma/client";
 
 import { db } from "@/lib/prisma";
@@ -13,7 +14,14 @@ export type TotalExpensePerCategory = {
 };
 
 export const getDashboard = async (month: string) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("Não autorizado.");
+  }
+
   const where = {
+    userId,
     date: {
       gte: new Date(`${new Date().getFullYear()}-${month}-01`),
       lt: new Date(`${new Date().getFullYear()}-${month}-31`)

@@ -12,9 +12,9 @@ export default async function AppLayout({ children }: AppLayoutProps) {
   if (!userId) redirect("/login");
 
   return (
-    <div className="space-y-6">
+    <div className="flex h-screen flex-col space-y-6 overflow-hidden">
       <Navbar />
-      {children}
+      <div className="flex h-full flex-col overflow-hidden">{children}</div>
     </div>
   );
 }

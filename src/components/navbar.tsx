@@ -7,7 +7,7 @@ import { NavItem } from "./nav-item";
 
 export const Navbar = () => {
   return (
-    <nav className="flex justify-between border-b p-6">
+    <nav className="flex justify-between border-b px-6 py-2">
       <div className="flex items-center gap-10">
         <Logo className="text-foreground" width={160} />
 
