@@ -42,6 +42,9 @@ export const TransactionsPieChart = (props: TransactionsPieChartProps) => {
   const { investmentsTotal, depositTotal, expensesTotal, typesPercentage } =
     props;
 
+  const isNoTransactions =
+    investmentsTotal === 0 && depositTotal === 0 && expensesTotal === 0;
+
   const chartData = [
     {
       type: TransactionType.DEPOSIT,
@@ -62,48 +65,56 @@ export const TransactionsPieChart = (props: TransactionsPieChartProps) => {
 
   return (
     <Card className="flex flex-col p-6">
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
-        >
-          <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+      {isNoTransactions ? (
+        <CardContent className="flex h-full w-full items-center justify-center">
+          <p>Não há dados. Crie novas transações.</p>
+        </CardContent>
+      ) : (
+        <>
+          <CardContent className="flex-1 pb-0">
+            <ChartContainer
+              config={chartConfig}
+              className="mx-auto aspect-square max-h-[250px]"
+            >
+              <PieChart>
+                <ChartTooltip
+                  cursor={false}
+                  content={<ChartTooltipContent hideLabel />}
+                />
+                <Pie
+                  data={chartData}
+                  dataKey="amount"
+                  nameKey="type"
+                  innerRadius={40}
+                />
+              </PieChart>
+            </ChartContainer>
+          </CardContent>
+          <CardFooter className="flex-col space-y-2 px-10">
+            <StatisticsItem
+              label="Ganhos"
+              percentage={typesPercentage.DEPOSIT}
+              icon={
+                <TrendingUpIcon className="size-8 rounded-sm bg-muted p-2 text-green-500" />
+              }
             />
-            <Pie
-              data={chartData}
-              dataKey="amount"
-              nameKey="type"
-              innerRadius={40}
+            <StatisticsItem
+              label="Gastos"
+              percentage={typesPercentage.EXPENSE}
+              icon={
+                <TrendingDownIcon className="size-8 rounded-sm bg-muted p-2 text-red-500" />
+              }
             />
-          </PieChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col space-y-2 px-10">
-        <StatisticsItem
-          label="Ganhos"
-          percentage={typesPercentage.DEPOSIT}
-          icon={
-            <TrendingUpIcon className="size-8 rounded-sm bg-muted p-2 text-green-500" />
-          }
-        />
-        <StatisticsItem
-          label="Gastos"
-          percentage={typesPercentage.EXPENSE}
-          icon={
-            <TrendingDownIcon className="size-8 rounded-sm bg-muted p-2 text-red-500" />
-          }
-        />
-        <StatisticsItem
-          label="Investimentos"
-          percentage={typesPercentage.INVESTMENT}
-          icon={
-            <PiggyBankIcon className="size-8 rounded-sm bg-muted p-2 text-muted-foreground" />
-          }
-        />
-      </CardFooter>
+            <StatisticsItem
+              label="Investimentos"
+              percentage={typesPercentage.INVESTMENT}
+              icon={
+                <PiggyBankIcon className="size-8 rounded-sm bg-muted p-2 text-muted-foreground" />
+              }
+            />
+          </CardFooter>
+        </>
+      )}
     </Card>
   );
 };

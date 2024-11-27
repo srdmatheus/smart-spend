@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getDashboard } from "@/data/get-dashboard";
 import { auth } from "@clerk/nextjs/server";
 import { isMatch } from "date-fns";
+import { SparklesIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -37,7 +38,9 @@ export default async function DashboardPage({
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <div className="flex items-center gap-3">
-          <Button>Resumo com IA</Button>
+          <Button>
+            Relatório com IA <SparklesIcon />
+          </Button>
           <TimeSelect />
         </div>
       </div>

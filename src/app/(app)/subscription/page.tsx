@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react";
+import { CheckIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,90 +10,79 @@ import {
   CardTitle
 } from "@/components/ui/card";
 
-export default function Component() {
-  const benefits = [
-    "Unlimited storage",
-    "Priority support",
-    "Ad-free experience",
-    "Advanced analytics",
-    "Collaboration tools"
-  ];
-  const hasPaidPlan = true;
+import { AcquireButton } from "./components/acquire-button";
+
+const benefits = [
+  "Transações ilimitadas",
+  "Recursos Avançados de IA",
+  "Sem anúncios"
+];
+
+export default function SubscriptionPage() {
+  const hasPaidPlan = false;
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-center text-3xl font-bold">
-        Choose Your Subscription
-      </h1>
+      <h1 className="mb-8 text-center text-3xl font-bold">Escolha seu plano</h1>
       <div className="grid gap-8 md:grid-cols-2">
-        {/* Free Plan Card */}
-        <Card>
+        <Card className="flex flex-col">
           <CardHeader>
-            <CardTitle>Free Plan</CardTitle>
-            <CardDescription>Basic features for personal use</CardDescription>
+            <CardTitle>Plano gratuito</CardTitle>
+            <CardDescription>Recursos limitados</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1">
             <ul className="space-y-2">
               <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Limited storage</span>
+                <XIcon className="mr-2 h-4 w-4 text-red-500" />
+                <span>Apenas 20 transações por mês (7/20)</span>
               </li>
               <li className="flex items-center">
-                <Check className="mr-2 h-4 w-4 text-green-500" />
-                <span>Basic support</span>
+                <XIcon className="mr-2 h-4 w-4 text-red-500" />
+                <span>Suporte básico</span>
               </li>
               <li className="flex items-center">
-                <X className="mr-2 h-4 w-4 text-red-500" />
-                <span>Ad-supported</span>
+                <XIcon className="mr-2 h-4 w-4 text-red-500" />
+                <span>Anúncios</span>
               </li>
-              {benefits.map((benefit, index) => (
-                <li
-                  key={index}
-                  className="flex items-center text-muted-foreground"
-                >
-                  <X className="mr-2 h-4 w-4 text-red-500" />
-                  <span className="line-through">{benefit}</span>
-                </li>
-              ))}
             </ul>
           </CardContent>
           <CardFooter>
-            <Button variant="outline" className="w-full" disabled={hasPaidPlan}>
-              {hasPaidPlan ? "Basic Plan" : "Current Plan"}
+            <Button variant="outline" className="w-full" disabled>
+              {hasPaidPlan ? "Plano básico" : "Plano atual"}
             </Button>
           </CardFooter>
         </Card>
 
-        {/* Paid Plan Card */}
-        <Card className="border-primary">
+        <Card className="flex flex-col border-primary">
           <CardHeader>
-            <CardTitle>Paid Plan</CardTitle>
-            <CardDescription>Advanced features for power users</CardDescription>
+            <CardTitle>Plano Pro</CardTitle>
+            <CardDescription>Recursos Avançados com IA</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1">
             <ul className="space-y-2">
               {benefits.map((benefit, index) => (
                 <li key={index} className="flex items-center">
-                  <Check className="mr-2 h-4 w-4 text-green-500" />
+                  <CheckIcon className="mr-2 h-4 w-4 text-green-500" />
                   <span>{benefit}</span>
                 </li>
               ))}
             </ul>
             {!hasPaidPlan && (
-              <div className="mt-4 text-center text-2xl font-bold">
-                $9.99/month
-              </div>
+              <>
+                <div className="mt-4 text-center text-3xl font-semibold">
+                  R$ 9.80{" "}
+                  <span className="text-lg font-normal opacity-80">/mês</span>
+                </div>
+              </>
             )}
           </CardContent>
           <CardFooter className="flex flex-col items-center space-y-2">
-            <Button className="w-full" disabled={hasPaidPlan}>
-              {hasPaidPlan ? "Current Plan" : "Upgrade Now"}
-            </Button>
             {hasPaidPlan && (
               <p className="text-sm text-muted-foreground">
-                You have an active paid plan
+                Parabéns, você possui o plano PRO ativo!
               </p>
             )}
+            <AcquireButton hasPaidPlan={hasPaidPlan} />
           </CardFooter>
         </Card>
       </div>

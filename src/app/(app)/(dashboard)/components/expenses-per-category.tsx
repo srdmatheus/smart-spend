@@ -10,6 +10,7 @@ type ExpensesPerCategoryProps = {
 };
 
 export const ExpensesPerCategory = ({ expenses }: ExpensesPerCategoryProps) => {
+  const isExpensesClear = expenses.length === 0;
   return (
     <Card className="col-span-2 overflow-hidden">
       <CardHeader className="border-b px-6 py-4">
@@ -17,19 +18,23 @@ export const ExpensesPerCategory = ({ expenses }: ExpensesPerCategoryProps) => {
       </CardHeader>
       <ScrollArea className="h-full">
         <CardContent className="space-y-6 px-6 py-4">
-          {expenses.map((expense, index) => (
-            <div key={`${expense}-${index}`} className="space-y-2">
-              <div className="flex w-full justify-between">
-                <p className="text-sm font-bold">
-                  {transactionCategoryMap[expense.category]}
-                </p>
-                <p className="text-sm font-bold">
-                  {expense.percentageOfTotal}%
-                </p>
+          {isExpensesClear ? (
+            <p className="text-center">Nenhum gasto cadastrado.</p>
+          ) : (
+            expenses.map((expense, index) => (
+              <div key={`${expense}-${index}`} className="space-y-2">
+                <div className="flex w-full justify-between">
+                  <p className="text-sm font-bold">
+                    {transactionCategoryMap[expense.category]}
+                  </p>
+                  <p className="text-sm font-bold">
+                    {expense.percentageOfTotal}%
+                  </p>
+                </div>
+                <Progress value={expense.percentageOfTotal} />
               </div>
-              <Progress value={expense.percentageOfTotal} />
-            </div>
-          ))}
+            ))
+          )}
         </CardContent>
       </ScrollArea>
     </Card>
