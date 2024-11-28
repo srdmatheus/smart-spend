@@ -3,6 +3,8 @@
 import { auth } from "@clerk/nextjs/server";
 import Stripe from "stripe";
 
+import { env } from "@/env";
+
 export const createStripeCheackout = async () => {
   const { userId } = await auth();
 
@@ -10,11 +12,7 @@ export const createStripeCheackout = async () => {
     throw new Error("Não autorizado.");
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error("Stripe secret key não encotnrada.");
-  }
-
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
     apiVersion: "2024-10-28.acacia"
   });
 
@@ -30,7 +28,7 @@ export const createStripeCheackout = async () => {
     },
     line_items: [
       {
-        price: process.env.STRIPE_PRO_PLAN_PRICE_ID,
+        price: env.STRIPE_PRO_PLAN_PRICE_ID,
         quantity: 1
       }
     ]

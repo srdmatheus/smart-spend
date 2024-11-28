@@ -47,3 +47,8 @@ export const transactionPaymentMethodIconMap: Record<
   [TransactionPaymentMethod.PIX]: "/pix.svg",
   [TransactionPaymentMethod.OTHER]: "/other.svg"
 };
+
+export enum PlanType {
+  FREE = "free",
+  PRO = "pro"
+}
