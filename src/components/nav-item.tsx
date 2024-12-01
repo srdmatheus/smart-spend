@@ -12,9 +12,7 @@ export const NavItem = ({ href, label }: NavItemProps) => {
     <Link
       href={href}
       className={
-        pathname === href
-          ? "font-bold text-primary-foreground"
-          : "text-muted-foreground"
+        pathname === href ? "font-bold text-primary" : "text-muted-foreground"
       }
     >
       {label}

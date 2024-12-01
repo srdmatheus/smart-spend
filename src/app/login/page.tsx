@@ -18,10 +18,10 @@ export default async function LoginPage() {
         <Logo className="mb-8 text-[#929292]" width={180} />
         <h1 className="mb-3 text-4xl font-semibold">Bem-vindo!</h1>
         <p className="mb-8">
-          O Financeiro Inteligente é um sistema de gestão financeira baseado em
-          IA, que acompanha suas movimentações e oferece insights
-          personalizados, tornando o controle do seu orçamento mais simples e
-          facilitando sua vida.
+          O SmartSpend é um sistema de gestão financeira baseado em IA, que
+          acompanha suas movimentações e oferece insights personalizados,
+          tornando o controle do seu orçamento mais simples e facilitando sua
+          vida.
         </p>
         <SignInButton>
           <Button variant="outline">Entre ou registre-se</Button>

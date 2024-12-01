@@ -1,3 +1,5 @@
+import { PlanType } from "@/constants";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { CheckIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -10,7 +12,8 @@ import {
   CardTitle
 } from "@/components/ui/card";
 
-import { AcquireButton } from "./components/acquire-button";
+import { AcquirePlanButton } from "./components/acquire-plan-button";
+import { ManagePlanButton } from "./components/manage-plan-button";
 
 const benefits = [
   "Transações ilimitadas",
@@ -18,8 +21,12 @@ const benefits = [
   "Sem anúncios"
 ];
 
-export default function SubscriptionPage() {
-  const hasPaidPlan = false;
+export default async function SubscriptionPage() {
+  const { userId } = auth();
+
+  const user = await clerkClient().users.getUser(userId!);
+
+  const hasProPlan = user?.publicMetadata.subscriptionPlan === PlanType.PRO;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -48,7 +55,7 @@ export default function SubscriptionPage() {
           </CardContent>
           <CardFooter>
             <Button variant="outline" className="w-full" disabled>
-              {hasPaidPlan ? "Plano básico" : "Plano atual"}
+              {hasProPlan ? "Plano básico" : "Plano atual"}
             </Button>
           </CardFooter>
         </Card>
@@ -67,22 +74,24 @@ export default function SubscriptionPage() {
                 </li>
               ))}
             </ul>
-            {!hasPaidPlan && (
-              <>
-                <div className="mt-4 text-center text-3xl font-semibold">
-                  R$ 9.80{" "}
-                  <span className="text-lg font-normal opacity-80">/mês</span>
-                </div>
-              </>
-            )}
           </CardContent>
           <CardFooter className="flex flex-col items-center space-y-2">
-            {hasPaidPlan && (
-              <p className="text-sm text-muted-foreground">
-                Parabéns, você possui o plano PRO ativo!
-              </p>
+            {hasProPlan ? (
+              <>
+                <p className="font-medium text-primary">
+                  Parabéns, você possui o plano PRO ativo!
+                </p>
+                <ManagePlanButton />
+              </>
+            ) : (
+              <>
+                <p className="mt-4 text-center text-3xl font-semibold">
+                  R$ 9.80{" "}
+                  <span className="text-lg font-normal opacity-80">/mês</span>
+                </p>
+                <AcquirePlanButton />
+              </>
             )}
-            <AcquireButton hasPaidPlan={hasPaidPlan} />
           </CardFooter>
         </Card>
       </div>
