@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![banner-smartspend-github](https://github.com/user-attachments/assets/1df1c625-ecef-4e2c-adfb-5ded0a2c42d8)
 
-## Getting Started
+# SmartSpend | Gestão financeira com IA.
 
-First, run the development server:
+Uma aplicação de gestão financeira inteligente que utiliza IA para acompanhar suas movimentações e oferecer insights personalizados. Projetado para tornar o controle do seu orçamento mais simples e eficiente, ele combina tecnologia moderna com uma interface intuitiva, ideal para organizar suas finanças.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Principais Funcionalidades
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Dashboard Interativo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Acompanhe seu saldo, ganhos, gastos e investimentos de forma prática e detalhada.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Gestão de Transações
 
-## Learn More
+Registre novas transações e visualize as recentes, incluindo detalhes como categoria, data e valor.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Relatórios Inteligentes com IA
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Gere relatórios personalizados que oferecem insights financeiros para ajudar na tomada de decisões.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Autenticação Segura com Clerk
 
-## Deploy on Vercel
+Faça login de forma segura com uma integração simplificada de autenticação.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. Plano de Assinatura com Stripe
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Acesse funcionalidades avançadas por meio de um sistema de assinatura.
+
+
+## 🛠️ Tecnologias Utilizadas
+
+- **[Next.js](https://nextjs.org/)**: Framework React para desenvolvimento de aplicações web.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Framework CSS para estilização.
+- **[OpenAI](https://openai.com/)**: API avançada para integração de inteligência artificial 
+- **[Prisma](https://www.prisma.io/)**: ORM para manipulação e integração com banco de dados de forma tipada e intuitiva.
+- **[Clerk](https://clerk.com/)**: Biblioteca para autenticação segura e gerenciamento de usuários.
+- **[Stripe](https://stripe.com/)**: Plataforma de pagamento utilizada para gerenciar assinaturas e transações financeiras.
+- **[Zod](https://zod.dev/)**: Biblioteca para validação de dados e tipagem segura no frontend e backend.
+- **[React Hook Form](https://react-hook-form.com/)**: Ferramenta para criação de formulários com foco em performance e acessibilidade.
+- **[Recharts](https://recharts.org/en-US/)**: Biblioteca para criação de gráficos dinâmicos e interativos.
+- **[Radix UI](https://www.radix-ui.com/)**: Componentes acessíveis e estilizáveis para melhorar a experiência do usuário.
+
+## 🚀 Como Rodar o Projeto
+
+### Pré-requisitos
+
+Certifique-se de ter o [Node.js](https://nodejs.org/) e o [npm](https://www.npmjs.com/) instalados na sua máquina.
+
+### Passos
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/srdmatheus/smart-spend.git
+   cd smart-spend
+   ```
+   
+2. **Instale as dependências:**
+
+   ```bash
+   npm install
+   ```
+   
+3. **Inicie o servidor de desenvolvimento:**
+  
+    ```bash
+   npm run dev
+   ```
+    
+4. **Preencha as variáveis de ambiente:**
+  
+   
+5. **Acesse a aplicação:**
+  
+    Abra o navegador e vá para `http://localhost:3000.`
+    
+
+
+## 📞 Contato
+Confira mais no meu [site pessoal](https://rmatheus.com/).  
+Para conversas e colaborações, me encontre no [LinkedIn](https://linkedin.com/in/srdmatheus).
+
+   
