@@ -1,5 +1,6 @@
-import { PlanType } from "@/constants";
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { PLAN_FREE_TRANSACTION_LIMIT } from "@/constants";
+import { countCurrentMonthTransactions } from "@/data/get-current-month-transactions";
+import { getUserDetails } from "@/utils/get-user-details";
 import { CheckIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -22,11 +23,8 @@ const benefits = [
 ];
 
 export default async function SubscriptionPage() {
-  const { userId } = auth();
-
-  const user = await clerkClient().users.getUser(userId!);
-
-  const hasProPlan = user?.publicMetadata.subscriptionPlan === PlanType.PRO;
+  const { hasProPlan } = await getUserDetails();
+  const transactionCountForCurrentMonth = await countCurrentMonthTransactions();
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -41,7 +39,13 @@ export default async function SubscriptionPage() {
             <ul className="space-y-2">
               <li className="flex items-center">
                 <XIcon className="mr-2 h-4 w-4 text-red-500" />
-                <span>Apenas 20 transações por mês (7/20)</span>
+                <span>
+                  Apenas 20 transações por mês ({" "}
+                  <span className="font-semibold text-red-500">
+                    {transactionCountForCurrentMonth}{" "}
+                  </span>
+                  / {PLAN_FREE_TRANSACTION_LIMIT} )
+                </span>
               </li>
               <li className="flex items-center">
                 <XIcon className="mr-2 h-4 w-4 text-red-500" />
