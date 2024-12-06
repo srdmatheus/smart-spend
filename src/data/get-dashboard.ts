@@ -100,6 +100,10 @@ export const getDashboard = async (month: string) => {
     take: 10
   });
 
+  const monthTransactions = await db.transaction.findMany({
+    where
+  });
+
   return {
     balance,
     depositTotal,
@@ -107,6 +111,7 @@ export const getDashboard = async (month: string) => {
     expensesTotal,
     typesPercentage,
     totalExpensePerCategory,
-    lastTransactions
+    lastTransactions,
+    monthTransactions
   };
 };

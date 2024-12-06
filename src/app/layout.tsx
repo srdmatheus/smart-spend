@@ -18,7 +18,7 @@ type RootLayoutProps = Readonly<{ children: React.ReactNode }>;
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-br">
-      <body className={`${fontVariables} dark font-sans antialiased`}>
+      <body className={`${fontVariables} font-sans antialiased`}>
         <ClerkProvider>{children}</ClerkProvider>
       </body>
     </html>
